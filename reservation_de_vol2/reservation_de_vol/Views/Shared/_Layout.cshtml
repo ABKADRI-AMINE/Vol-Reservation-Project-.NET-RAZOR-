@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Moteur de recherche des vols</title>
+<!-- meta-tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Wacky Trip Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //meta-tags -->
+<link href="~/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="~/css/font-awesome.css" rel="stylesheet"> 
+<link rel="stylesheet" href="~/css/owl.carousel.css" type="text/css" media="all"/> <!-- Owl-Carousel-CSS -->
+<link rel="stylesheet" href="~/css/flexslider.css" type="text/css" media="screen" property="" />
+<link href="~/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="~/css/lightbox.css">
+<!--web-fonts-->
+<link href="//fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Tangerine:400,700" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<!--//web-fonts-->
+
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css'>
+	<link rel='stylesheet' href='https://static.fontawesome.com/css/fontawesome-app.css'>
+	<link rel='stylesheet' href='https://pro.fontawesome.com/releases/v5.2.0/css/all.css'>
+	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,700'>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script type="text/javascript">
+
+		$(document).ready(function () {
+			$("#departure").autocomplete(
+				{
+					source: function (request, response) {
+						$.ajax({
+							url: "/Home/Index",
+							type: "POST",
+							dataType: "json",
+							data: { Prefix: request.term },
+							success: function (data) {
+								response($.map(data, function (item) {
+									return { label: item.city };
+								}))
+							}
+						})
+					},
+				});
+		})
+	</script>
+	<script type="text/javascript">
+
+		$(document).ready(function () {
+			$("#arriver").autocomplete(
+				{
+					source: function (request, response) {
+						$.ajax({
+							url: "/Home/Index",
+							type: "POST",
+							dataType: "json",
+							data: { Prefix: request.term },
+							success: function (data) {
+								response($.map(data, function (item) {
+									return { label: item.city };
+								}))
+							}
+						})
+					},
+				});
+		})
+	</script>
+	<link rel="icon" type="image/x-icon" href="/lib/favicon.ico">
+
+</head>
+<body>
+
+            @RenderBody()
+
+	
+
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="footer-col">
+					<h4>company</h4>
+					<ul>
+						<li><a href="#">about us</a></li>
+						<li><a href="#">our services</a></li>
+						<li><a href="#">privacy policy</a></li>
+						<li><a href="#">affiliate program</a></li>
+					</ul>
+				</div>
+				
+				
+				<div class="footer-col">
+					<h4>follow us</h4>
+					<div class="social-links">
+						<a href="#"><i class="fab fa-facebook-f"></i></a>
+						<a href="#"><i class="fab fa-twitter"></i></a>
+						<a href="#"><i class="fab fa-instagram"></i></a>
+						<a href="#"><i class="fab fa-linkedin-in"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+<!-- //Footer -->
+
+
+<script src="js/jquery-2.2.3.min.js"></script> 
+
+					<script src="js/lightbox-plus-jquery.min.js"></script>	
+			<!-- Owl-Carousel-JavaScript -->
+	<script src="js/owl.carousel.js"></script>
+	<script>
+		$(document).ready(function() {
+			$("#owl-demo").owlCarousel ({
+				items : 4,
+				lazyLoad : true,
+				autoPlay : true,
+				pagination : true,
+			});
+		});
+	</script>
+	<script>
+		$(".option").click(function () {
+			$(".option").removeClass("active");
+			$(this).addClass("active");
+
+		});
+	</script>
+	<!-- //Owl-Carousel-JavaScript -->  
+	<!-- flexSlider -->
+					<script defer src="js/jquery.flexslider.js"></script>
+					<script type="text/javascript">
+					$(window).load(function(){
+					  $('.flexslider').flexslider({
+						animation: "slide",
+						start: function(slider){
+						  $('body').removeClass('loading');
+						}
+					  });
+					});
+				  </script>
+				<!-- //flexSlider -->
+ <!-- Move-top-scrolling -->
+<script type="text/javascript" src="js/move-top.js"></script>
+<script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){		
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+</script>
+<!-- Move-top-scrolling -->
+<!-- Calendar -->
+				<link rel="stylesheet" href="css/jquery-ui.css" />
+				<script src="js/jquery-ui.js"></script>
+				  <script>
+						  $(function() {
+							$( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
+						  });
+				  </script>
+			<!-- //Calendar -->
+<!--js for bootstrap working-->
+	<script src="js/bootstrap.js"></script>
+<!-- //for bootstrap working -->
+</body>
+</html>

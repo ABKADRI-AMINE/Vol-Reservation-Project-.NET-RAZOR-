@@ -1,0 +1,36 @@
+﻿<Properties StartupConfiguration="{20CE955D-501C-4F64-98AB-9787CB77D50B}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="reservation_de_vol/Controllers/HomeController.cs">
+    <Files>
+      <File FileName="reservation_de_vol/Models/aeroport.cs" Line="9" Column="25" />
+      <File FileName="reservation_de_vol/Views/Home/AllerRetour.cshtml" Line="72" Column="72" />
+      <File FileName="reservation_de_vol/Controllers/HomeController.cs" Line="121" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="reservation_de_vol" expanded="True">
+            <Node name="reservation_de_vol" expanded="True">
+              <Node name="Dependencies" expanded="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="HomeController.cs" selected="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
+              <Node name="Properties" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Home" expanded="True" />
+              </Node>
+              <Node name="wwwroot" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.reservation__de__vol PreferredExecutionTarget="/Applications/Safari.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

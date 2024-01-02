@@ -1,0 +1,164 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<Vol>
+@{
+    ViewData["Title"] = "Resultat de la recherche";
+    ViewBag.Title = "Result";
+    var data = ViewBag.Message;
+    Vol vol = ViewBag.Vol;
+    Console.WriteLine("CPU count:", data);
+    Func<string, string> Duration = (d) => d.Substring(2, d.Length - 2).ToLower();
+}
+<div style="display: flex; justify-content: center; align-items: center; margin-top: 20px">
+    <label for="priceFilter">Filter by Price: &nbsp</label>
+    <select id="priceFilter" onchange="filterResultsByPrice()" style="background-color: white; color: black;">
+        <option value="all" style="background-color: white; color: black;">All Prices</option>
+        @{
+            var uniquePrices = new List<decimal>();
+            foreach (var obj in data.data)
+            {
+                var price = obj.price.total;
+                if (!uniquePrices.Contains((decimal)price))
+                {
+                    uniquePrices.Add((decimal)price);
+                }
+            }
+
+            foreach (var uniquePrice in uniquePrices)
+            {
+                <option value="@uniquePrice" style="background-color: white; color: black;">@uniquePrice</option>
+            }
+        }
+    </select>&nbsp &nbsp
+    @*<label for="timeFilter">Filter by Departure Time :&nbsp &nbsp</label>
+    <select id="timeFilter" onchange="filterResultsByTime()" style="background-color: white; color: black;">
+        <option value="all" style="background-color: white; color: black;">All Departure Times</option>
+        @{
+            var uniqueDepartureTimes = new List<string>();
+            foreach (var obj in data.data)
+            {
+                foreach (var it in obj.itineraries)
+                {
+                    foreach (var seg in it.segments)
+                    {
+                        var departureTime = seg.departure.at.ToString();
+                        if (!uniqueDepartureTimes.Contains(departureTime))
+                        {
+                            uniqueDepartureTimes.Add(departureTime);
+                        }
+                    }
+                }
+            }
+
+            foreach (var uniqueDepartureTime in uniqueDepartureTimes)
+            {
+                <option value="@uniqueDepartureTime" style="background-color: white; color: black;">@uniqueDepartureTime</option>
+            }
+        }
+    </select>*@
+</div>
+
+@{
+    if (data.data.Count == 0)
+    {
+        <div class="alert alert-info text-center" role="alert">
+            Sorry, No Flights For this date, Please change the Date to view other flights
+        </div>
+    }
+}
+
+<!-- Add this dropdown list or buttons above your flight results -->
+@foreach (var obj in data.data)
+{
+    @*<tr>
+            <th scope="row">@obj.flight_date</th>
+            <td>@obj.flight_status</td>
+
+        </tr>*@
+
+    @foreach (var it in obj.itineraries)
+    {
+        <div class="result-container" style=" padding: 4%;margin: 30px;box-shadow: 0px 8px 15px rgb(0 0 0 / 10%); background: linear-gradient(to right, transparent, skyblue),url('https: //mdn.mozillademos.org/files/15525/critters.png');">
+            <div style="color:black;">
+                @foreach (var seg in it.segments)
+                {
+
+                    <div style="display:flex ;justify-content:center">
+                        <h1 style="font-size: 1rem; color: #202020; line-height: 1rem; font-weight: bold; text-align:start; margin-right:10px">@seg.departure.iataCode  </h1>
+                        <h2 style=" margin-right: 1rem; font-size: 1.2rem;  color: #606060; line-height: 1.5rem; ">@seg.departure.at.ToLongTimeString().Split(" ")[0]  </h2>
+                        <div style="position: relative;top: -10px;">
+
+                            <h2 style="font-size: 1.2rem; color: #202020; line-height: 1.5rem;">Aller : @seg.departure.at.ToString().Split(" ")[0]</h2>
+
+                            <div style="width: 160px; height: 2px; background-color: black; margin-top: 10px; "></div>
+                        </div>
+
+                        <h2 style=" margin-left: 1rem; font-size: 1.2rem;  color: #606060; line-height: 1.5rem; ">@seg.arrival.at.ToLongTimeString().Split(" ")[0]</h2>
+                        <h1 style="font-size: 1rem; color: #202020; line-height: 1rem; font-weight: bold; text-align:start; margin-left:10px">@seg.arrival.iataCode </h1>
+                    </div>
+
+                    <div style="display: flex; justify-content: center; margin-bottom: 30px; justify-content: space-around; ">
+                        <div style="margin-right: 100px; margin-left: 100px;">
+                            <ul style="display: flex ;list-style-type: none;">
+                                <li style="font-size: .875rem; color: blue; line-height: 1.5rem; margin-right: 10px; ">Flight number</li>
+                                <li style=" font-size: 1rem; color: blue; line-height: 1.5rem; font-weight: 600 ">@seg.number</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                }
+                <!--<button type="button" style="margin-left: 600px;" class="btn btn-warning">BOOK NOW</button>-->
+                <div style="background-color: blue; border-radius: 6px; padding: 10px;margin:auto; width: 110px;">
+                    <h4 style=" font-size: 1rem; color: white; line-height: 1.5rem; font-weight:600 ">@obj.price.total @obj.price.currency</h4>
+                </div>
+            </div>
+        </div>
+
+    }
+
+
+}
+<script>
+    function filterResultsByPrice() {
+        var priceFilter, div, priceElement, priceValue, selectedPriceOption;
+        selectedPriceOption = document.getElementById('priceFilter');
+        priceFilter = selectedPriceOption.value;
+        div = document.getElementsByClassName('result-container');
+
+        for (var i = 0; i < div.length; i++) {
+            priceElement = div[i].getElementsByTagName('h4')[0];
+            priceValue = priceElement.textContent || priceElement.innerText;
+
+            var priceCondition = priceFilter === 'all' || priceValue.includes(priceFilter);
+
+            if (priceCondition) {
+                div[i].style.display = '';
+            } else {
+                div[i].style.display = 'none';
+            }
+        }
+    }
+
+    function filterResultsByTime() {
+        var timeFilter, div, timeElement, timeValue, selectedTimeOption;
+        selectedTimeOption = document.getElementById('timeFilter');
+        timeFilter = selectedTimeOption.value;
+        div = document.getElementsByClassName('result-container');
+
+        for (var i = 0; i < div.length; i++) {
+            timeElement = div[i].getElementsByTagName('h2')[2]; // Assuming the departure time is the third h2 element
+            timeValue = timeElement.textContent || timeElement.innerText;
+
+            console.log('Expected:', timeFilter, 'Actual:', timeValue); // Debug line
+
+            var timeCondition = timeFilter === 'all' || timeValue.includes(timeFilter);
+
+            if (timeCondition) {
+                div[i].style.display = '';
+            } else {
+                div[i].style.display = 'none';
+            }
+        }
+    }
+</script>
